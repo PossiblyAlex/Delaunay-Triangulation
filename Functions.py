@@ -52,3 +52,13 @@ def intersect_proper(a, b, c, d):
         return False
     else:
         return left(a, b, c) ^ left(a, b, d) and left(c, d, a) ^ left(c, d, b)
+
+
+# Returns true iff segments ab and cd intersect properly or improperly
+def intersect(a, b, c, d):
+    if intersect_proper(a, b, c, d):
+        return True
+    elif between(a, b, c) or between(a, b, d) or between(c, d, a) or between(c, d, b):
+        return True
+    else:
+        return False

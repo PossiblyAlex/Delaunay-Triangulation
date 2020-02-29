@@ -31,7 +31,8 @@ def add_point(point):
         print("between = " + str(f.between(points[0], points[1], points[2])))
     if len(points) == 4:
         print(points[0])
-        print("do ab and cd cross proper: " + str(f.intersect_proper(points[0], points[1], points[2], points[3])))
+        print("do ab and cd cross properly: " + str(f.intersect_proper(points[0], points[1], points[2], points[3])))
+        print("do ab and cd intersect: " + str(f.intersect(points[0], points[1], points[2], points[3])))
 
 
 
@@ -68,6 +69,10 @@ def update():
 
 canvas.bind("<Button-1>", left_click)
 canvas.bind_all("<Return>", enter_press)
+#add_point((100,100))
+#add_point((200,200))
+#add_point((208,37))
+#add_point((150,150))
 
 root.mainloop()
 
