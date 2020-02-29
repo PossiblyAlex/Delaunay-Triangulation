@@ -40,3 +40,15 @@ def between(a, b, c):
         return (a[0] <= c[0] <= b[0]) or (a[0] >= c[0] >= b[0])
     else:
         return (a[1] <= c[1] <= b[1]) or (a[1] >= c[1] >= b[1])
+
+
+# Returns true iff ab properly intersects cd:
+# they share a point interior to both segments.
+# The properness of intersection is ensured by
+# using strict leftness
+def intersect_proper(a, b, c, d):
+    # eliminate improper cases
+    if colinear(a, b, c) or colinear(a, b, d) or colinear(c, d, a) or colinear(c, d, b):
+        return False
+    else:
+        return left(a, b, c) ^ left(a, b, d) and left(c, d, a) ^ left(c, d, b)

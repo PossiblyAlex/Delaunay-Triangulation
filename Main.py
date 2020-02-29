@@ -28,6 +28,11 @@ def add_point(point):
         print("2A = " + str(area))
         print("left(a,b,c) = " + str(f.left(points[0], points[1], points[2])))
         print("colinear = " + str(f.colinear(points[0], points[1], points[2])))
+        print("between = " + str(f.between(points[0], points[1], points[2])))
+    if len(points) == 4:
+        print(points[0])
+        print("do ab and cd cross proper: " + str(f.intersect_proper(points[0], points[1], points[2], points[3])))
+
 
 
 def left_click(event):
