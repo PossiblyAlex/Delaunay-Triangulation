@@ -27,6 +27,7 @@ def add_point(point):
         area = f.area(points[0], points[1], points[2])
         print("2A = " + str(area))
         print("left(a,b,c) = " + str(f.left(points[0], points[1], points[2])))
+        print("colinear = " + str(f.colinear(points[0], points[1], points[2])))
 
 
 def left_click(event):

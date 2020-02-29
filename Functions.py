@@ -18,3 +18,10 @@ def area(a, b, c):
 def left(a, b, c):
     isLeft = area(a, b, c) > 0
     return isLeft
+
+
+# This function will return a boolean value if point c
+# is colinear with the line ab
+def colinear(a, b, c):
+    is_cl = area(a, b, c) == 0
+    return is_cl
