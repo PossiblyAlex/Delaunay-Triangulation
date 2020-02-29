@@ -1,5 +1,5 @@
 import tkinter as tk
-
+import Functions as f
 
 print("Program is running...")
 root = tk.Tk()
@@ -22,23 +22,35 @@ def add_point(point):
     if len(points) > 1:
         adjMatrix[len(points)-2][len(points)-1] = 1
 
-    for x in adjMatrix:
-        print(x)
+    print(points)
+    if len(points) == 3:
+        area = f.area(points[0], points[1], points[2])
+        print("2A = " + str(area))
+        print("left(a,b,c) = " + str(f.left(points[0], points[1], points[2])))
+        print("colinear = " + str(f.colinear(points[0], points[1], points[2])))
+        print("between = " + str(f.between(points[0], points[1], points[2])))
+    if len(points) == 4:
+        print(points[0])
+        print("do ab and cd cross properly: " + str(f.intersect_proper(points[0], points[1], points[2], points[3])))
+        print("do ab and cd intersect: " + str(f.intersect(points[0], points[1], points[2], points[3])))
+
 
 
 def left_click(event):
-    print("Left")
-    print(event.x)
-    print(event.y)
     x = event.x
     y = event.y
 
     add_point((x,y))
-    print(len(points))
-    if len(points) > 2:
-        print("todo")
     update()
-    """print(points)"""
+
+
+def enter_press(event):
+    global points
+    global adjMatrix
+    points = []
+    adjMatrix = []
+    update()
+
 
 def update():
     for item in canvas.find_all():
@@ -52,11 +64,15 @@ def update():
         for j, edge in enumerate(col):
             if edge == 1:
                 canvas.create_line(points[i][0], points[i][1], points[j][0], points[j][1])
-
     canvas.pack()
 
 
 canvas.bind("<Button-1>", left_click)
+canvas.bind_all("<Return>", enter_press)
+#add_point((100,100))
+#add_point((200,200))
+#add_point((208,37))
+#add_point((150,150))
 
 root.mainloop()
 
