@@ -26,24 +26,15 @@ def add_point(point):
     if len(points) == 3:
         area = f.area(points[0], points[1], points[2])
         print("2A = " + str(area))
-
-    for x in adjMatrix:
-        print(x)
+        print("left(a,b,c) = " + str(f.left(points[0], points[1], points[2])))
 
 
 def left_click(event):
-    print("Left")
-    print(event.x)
-    print(event.y)
     x = event.x
     y = event.y
 
     add_point((x,y))
-    print(len(points))
-    if len(points) > 2:
-        print("todo")
     update()
-    """print(points)"""
 
 
 def enter_press(event):

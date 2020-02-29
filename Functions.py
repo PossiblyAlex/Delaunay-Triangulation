@@ -11,3 +11,10 @@ def area(a, b, c):
     # the negation of the whole area.
     two_area = a[0]*b[1] - a[1]*b[0] + a[1]*c[0] - a[0]*c[1] + b[0]*c[1] - b[1]*c[0]
     return two_area * -1
+
+
+# This function will return a boolean value if the point c
+# is to the left of the directional line a->b
+def left(a, b, c):
+    isLeft = area(a, b, c) > 0
+    return isLeft
