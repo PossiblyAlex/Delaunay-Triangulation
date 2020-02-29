@@ -1,5 +1,5 @@
 import tkinter as tk
-
+import Functions as f
 
 print("Program is running...")
 root = tk.Tk()
@@ -52,7 +52,6 @@ def update():
         for j, edge in enumerate(col):
             if edge == 1:
                 canvas.create_line(points[i][0], points[i][1], points[j][0], points[j][1])
-
     canvas.pack()
 
 
