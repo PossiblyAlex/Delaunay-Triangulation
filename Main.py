@@ -35,6 +35,20 @@ def add_point(point):
         print("do ab and cd intersect: " + str(f.intersect(points[0], points[1], points[2], points[3])))
 
 
+def complete_polygon():
+    if len(points) < 3:
+        return
+
+    hasIntersection = False
+    for i in range(1, len(points) - 1):
+        for j in range(1, len(points) - 1):
+            if adjMatrix[i][j] == 1:
+                if f.intersect(points[len(points)-1], points[0], points[i], points[j]):
+                    hasIntersection = True
+    if hasIntersection == False:
+        adjMatrix[len(points)-1][0] = 1
+        update()
+
 
 def left_click(event):
     x = event.x
@@ -55,6 +69,7 @@ def enter_press(event):
 def key_pressed(event):
     if event.char == 'f':
         print("User pressed f")
+        complete_polygon()
 
 
 def update():
