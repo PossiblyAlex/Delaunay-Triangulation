@@ -53,8 +53,8 @@ def enter_press(event):
 
 
 def key_pressed(event):
-    print(event.char)
-    pass
+    if event.char == 'f':
+        print("User pressed f")
 
 
 def update():
