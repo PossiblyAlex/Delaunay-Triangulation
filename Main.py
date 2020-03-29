@@ -52,6 +52,11 @@ def enter_press(event):
     update()
 
 
+def key_pressed(event):
+    print(event.char)
+    pass
+
+
 def update():
     for item in canvas.find_all():
         canvas.delete(item)
@@ -69,6 +74,7 @@ def update():
 
 canvas.bind("<Button-1>", left_click)
 canvas.bind_all("<Return>", enter_press)
+canvas.bind_all("<Key>", key_pressed)
 #add_point((100,100))
 #add_point((200,200))
 #add_point((208,37))
