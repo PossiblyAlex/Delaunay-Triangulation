@@ -35,10 +35,16 @@ def add_point(point):
         print("do ab and cd intersect: " + str(f.intersect(points[0], points[1], points[2], points[3])))
 
 
+# Function will go through the matrix and
+# check every edge except for the first
+# and last edge for an intersection with
+# an edge from the last point to the first
+#
+# If no intersection is found, it will make the matrix at [length-1][0] 1,
+# completing the polygon
 def complete_polygon():
     if len(points) < 3:
         return
-
     hasIntersection = False
     for i in range(1, len(points) - 1):
         for j in range(1, len(points) - 1):
