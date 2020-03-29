@@ -10,6 +10,24 @@ points = []
 adjMatrix = []
 
 
+# Checks if the edge will intersect any of the other edges
+# starting from the index of start
+# Does not check for intersection with the edge immediately
+# before edge, as it should never intersect
+#
+# Edge should be a tuple containing two index values
+def has_intersect(start, end, edge):
+    if len(points) < 3:
+        return False
+
+    for i in range(start, end):
+        for j in range(start, end):
+            if adjMatrix[i][j] == 1:
+                if f.intersect(points[edge[0]], points[edge[1]], points[i], points[j]):
+                    return True
+    return False
+
+
 def reset_matrix():
     global adjMatrix;
     # Either  or
@@ -24,6 +42,7 @@ def reset_matrix():
             adjMatrix[i] = adjMatrix[i][:length]
         adjMatrix = adjMatrix[:length]
 
+
 def add_point(point):
     global points
     points.append(point)
@@ -33,7 +52,7 @@ def add_point(point):
     if len(points) > 1:
         adjMatrix[len(points)-2][len(points)-1] = 1
 
-    if len(points) == 4 and f.intersect(points[0], points[1], points[2], points[3]):
+    if len(points) > 3 and has_intersect(0, len(points)-2, (-2, -1)):
         points = points[:-1]
         reset_matrix()
 
@@ -48,22 +67,10 @@ def add_point(point):
 def complete_polygon():
     if len(points) < 3:
         return
-    hasIntersection = has_intersect(1)
+    hasIntersection = has_intersect(1, len(points)-1, (len(points)-1, 0))
     if hasIntersection == False:
         adjMatrix[len(points)-1][0] = 1
         update()
-
-
-def has_intersect(start):
-    if len(points) < 3:
-        return False
-
-    for i in range(start, len(points) - 1):
-        for j in range(start, len(points) - 1):
-            if adjMatrix[i][j] == 1:
-                if f.intersect(points[len(points)-1], points[0], points[i], points[j]):
-                    return True
-    return False
 
 
 def left_click(event):
