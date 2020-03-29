@@ -10,29 +10,32 @@ points = []
 adjMatrix = []
 
 
+def reset_matrix():
+    global adjMatrix;
+    # Either  or
+    if len(points) > len(adjMatrix):
+        for col in adjMatrix:
+            col.append(0)
+        tempCol = [0] * len(points)
+        adjMatrix.append(tempCol)
+    elif len(points) < len(adjMatrix):
+        length = len(points)
+        for i in range(0, len(adjMatrix)):
+            adjMatrix[i] = adjMatrix[i][:length]
+        adjMatrix = adjMatrix[:length]
+
 def add_point(point):
+    global points
     points.append(point)
 
-    for col in adjMatrix:
-        col.append(0)
-
-    tempCol = [0] * len(points)
-    adjMatrix.append(tempCol)
+    reset_matrix()
 
     if len(points) > 1:
         adjMatrix[len(points)-2][len(points)-1] = 1
 
-    print(points)
-    if len(points) == 3:
-        area = f.area(points[0], points[1], points[2])
-        print("2A = " + str(area))
-        print("left(a,b,c) = " + str(f.left(points[0], points[1], points[2])))
-        print("colinear = " + str(f.colinear(points[0], points[1], points[2])))
-        print("between = " + str(f.between(points[0], points[1], points[2])))
-    if len(points) == 4:
-        print(points[0])
-        print("do ab and cd cross properly: " + str(f.intersect_proper(points[0], points[1], points[2], points[3])))
-        print("do ab and cd intersect: " + str(f.intersect(points[0], points[1], points[2], points[3])))
+    if len(points) == 4 and f.intersect(points[0], points[1], points[2], points[3]):
+        points = points[:-1]
+        reset_matrix()
 
 
 # Function will go through the matrix and
@@ -45,15 +48,22 @@ def add_point(point):
 def complete_polygon():
     if len(points) < 3:
         return
-    hasIntersection = False
-    for i in range(1, len(points) - 1):
-        for j in range(1, len(points) - 1):
-            if adjMatrix[i][j] == 1:
-                if f.intersect(points[len(points)-1], points[0], points[i], points[j]):
-                    hasIntersection = True
+    hasIntersection = has_intersect(1)
     if hasIntersection == False:
         adjMatrix[len(points)-1][0] = 1
         update()
+
+
+def has_intersect(start):
+    if len(points) < 3:
+        return False
+
+    for i in range(start, len(points) - 1):
+        for j in range(start, len(points) - 1):
+            if adjMatrix[i][j] == 1:
+                if f.intersect(points[len(points)-1], points[0], points[i], points[j]):
+                    return True
+    return False
 
 
 def left_click(event):
